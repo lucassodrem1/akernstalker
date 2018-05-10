@@ -3,7 +3,7 @@ Aker Project.
 
 CRUD - AngularJS & PHP & MySQL.
 
-<h2> IMPORTANT </h2> 
+## Important
 
 Open in your web server the file "akernstalker/sql/connect.php" to install de database.
 
