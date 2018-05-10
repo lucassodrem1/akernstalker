@@ -1,5 +1,5 @@
 # akernstalker
-Projeto Aker
+Aker Project.
 
 CRUD - AngularJS with PHP.
 
