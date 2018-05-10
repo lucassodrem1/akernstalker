@@ -3,11 +3,11 @@ Aker Project.
 
 CRUD - AngularJS & PHP & MySQL.
 
-## Important
+## Installation
 
 Open in your web server the file "akernstalker/sql/connect.php" to install de database.
 
-<h4> Possible Problems for php users who use versions older than 7.0 </h4>
+### Possible Problems for php users who use versions older than 7.0 >
  
 If the program doesn't work correctly, the problem may be because of the following error:
 
