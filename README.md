@@ -16,7 +16,7 @@ If the program doesn't work correctly, the problem may be because of the followi
 Solution:
   1. Open the file php.ini.
   1. Search for `; always_populate_raw_post_data = -1`.
-  1. Change this line for `always_populate_raw_post_data = -1`.
+  1. Change this line to `always_populate_raw_post_data = -1`.
 
 
 
