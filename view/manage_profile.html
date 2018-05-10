@@ -1,0 +1,36 @@
+<body ng-controller="manageProfileCtrl" ng-view>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" ng-include="'view/navbar/other_navbar.html'"></nav>
+
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="offset-md-3 col-md-6 offset-md-3">
+                    <h3 class="text-center text-muted"> Gerenciamento de perfis </h3>
+                    <div class="scrollable">
+                        <table class="table table-striped text-center" id="scrollable">
+                            <tr>
+                                <td colspan="3"> Cargos </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <input type="text" class="form form-control" placeholder="Qual cargo você está procurando?" ng-model="profileSearch"> </td>
+                            </tr>
+                            <tr ng-repeat="profile in profiles | filter: {name: profileSearch} | orderBy: 'name'">
+                                <td> {{profile.name}} </td>
+                                <td>
+                                    <a href="#!update_profile/{{profile.id}}">
+                                        <button class="btn btn-warning  btn-sm"> Editar </button>
+                                    </a>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm" ng-model="profile.selected" ng-click="deleteProfile(profile)"> Excluir </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="alert-messages"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

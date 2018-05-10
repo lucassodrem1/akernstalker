@@ -1,0 +1,51 @@
+<body ng-controller="manageUserCtrl" ng-view>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" ng-include="'view/navbar/other_navbar.html'"></nav>
+
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="offset-md-2 col-md-8 offset-md-2">
+                    <h3 class="text-center text-muted"> Gerenciamento de usuários </h3>
+                    <div class="scrollable">
+                        <table class="table table-striped text-center" id="scrollable">
+                            <tr>
+                                <td colspan="6"> Usuários </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <input type="text" class="form form-control" placeholder="Quem você está procurando?" ng-model="userSearch">
+                                </td>
+                                <td colspan="2">
+                                    <input type="text" class="form form-control" placeholder="Procure por cargos." ng-model="profileSearch">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> Nome </td>
+                                <td> Cargo </td>
+                                <td> Último acesso </td>
+                                <td> Criado em </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr ng-repeat="user in users | filter: {username: userSearch, profile: profileSearch} | orderBy: 'name'">
+                                <td> {{user.username}} </td>
+                                <td> {{user.profile}} </td>
+                                <td> {{user.lastAccess | date:'EEE dd/MM/yyyy HH:mm'}} </td>
+                                <td> {{user.createDate}} </td>
+                                <td>
+                                    <a href="#!update_user/{{user.id}}">
+                                        <button class="btn btn-warning btn-sm"> Editar </button>
+                                    </a>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm" ng-model="profile.selected" ng-click="deleteUser(user)"> Excluir </button>
+                                </td>
+                            </tr>
+                        </table>
+                        <div id="alert-messages"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

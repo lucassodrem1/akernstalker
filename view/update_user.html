@@ -1,0 +1,39 @@
+<body ng-controller="updateUserCtrl" ng-view>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" ng-include="'view/navbar/other_navbar.html'"></nav>
+
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="offset-md-3 col-md-6 offset-md-3">
+                    <h3 class="text-center text-muted"> Editar usuário </h3>
+                    <form name="editForm" autocomplete="off">
+                        <label class="text-muted">Alterar nome:</label>
+                        <input class="form-control form-control-sm" placeholder="Deixe o campo vazia se quiser manter." type="text" name="name" ng-model="edit.name">
+                        <br>
+                        <label class="text-muted">Alterar senha:</label>
+                        <input class="form-control form-control-sm" placeholder="Deixe o campo vazia se quiser manter." type="password" name="password"
+                            ng-model="edit.password">
+                        <br>
+                        <label class="text-muted">Alterar cargo:</label>
+                        <select class="form-control form-control-sm" type="password" ng-model="edit.profile" 
+                            ng-options="profile.id as profile.name for profile in profiles">
+                            <option value=""> Não escolha se quiser manter. </option>
+                        </select>
+                        <br>
+                        <button class="btn btn-success btn-block" ng-disabled="editForm.$invalid" ng-click="editUser()"> Editar usuário </button>
+                    </form>
+                    <br>
+                    <a href="#!manage_user">
+                        <button class="btn btn-primary btn-block"> Voltar </button>
+                    </a>
+
+                    <!-- Mensagens de erro. -->
+                    <div id="alert-messages">
+                        <div class="alert alert-danger text-center" ng-show="editForm.name.$error.required && editForm.name.$dirty">
+                            Preencha o campo nome!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>

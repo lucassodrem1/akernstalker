@@ -1,0 +1,32 @@
+<body ng-controller="loginCtrl">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" ng-include="'view/navbar/login_navbar.html'"></nav>
+
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="offset-md-3 col-md-6 offset-md-3">
+                    <form name="loginForm" autocomplete="off">
+                        <h3 class="text-center text-muted"> Entrar </h3>
+                        <label class="text-muted"> Nome: </label>
+                        <input type="text" name="username" class="form-control form-control-sm" ng-model="login.username" ng-required="true">
+                        <br>
+                        <label class="text-muted"> Senha: </label>
+                        <input type="password" name="password" class="form-control form-control-sm" ng-model="login.password" ng-required="true">
+                        <br>
+                        <button class="btn btn-primary btn-block" ng-disabled="loginForm.$invalid" ng-click="userLogin()"> Entrar </button>
+                    </form>
+
+                    <!-- Alertas. -->
+                    <div id="alert-messages">
+                        <div class="alert alert-danger text-center" ng-show="loginForm.username.$error.required && loginForm.username.$dirty">
+                            Preencha o campo nome!
+                        </div>
+                        <div class="alert alert-danger text-center" ng-show="loginForm.password.$error.required && loginForm.password.$dirty">
+                            Preencha o campo senha!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

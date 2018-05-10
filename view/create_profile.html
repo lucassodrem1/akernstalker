@@ -1,0 +1,26 @@
+<body ng-controller="createProfileCtrl" ng-view>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" ng-include="'view/navbar/other_navbar.html'"></nav>
+
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="offset-md-3 col-md-6 offset-md-3">
+                    <h3 class="text-center text-muted"> Criar perfil </h3>
+                    <form name="profileForm" autocomplete="off">
+                        <label class="text-muted"> Nome: </label>
+                        <input type="text" name="name" class="form-control form-control-sm" ng-model="create.profileName" ng-required="true">
+                        <br>
+                        <button class="btn btn-primary btn-block" ng-disabled="profileForm.$invalid" ng-click="createProfile()"> Criar perfil </button>
+                    </form>
+
+                    <!-- Alertas. -->
+                    <div id="alert-messages">
+                        <div ng-show="profileForm.name.$error.required && profileForm.name.$dirty" class="alert alert-danger text-center">
+                            Preencha o campo nome!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

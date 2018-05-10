@@ -1,0 +1,28 @@
+<body ng-controller="updateProfileCtrl" ng-view>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" ng-include="'view/navbar/other_navbar.html'"></nav>
+
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="offset-md-3 col-md-6 offset-md-3">
+                    <h3 class="text-center text-muted"> Editar cargo </h3>
+                    <form name="editForm" autocomplete="off">
+                        <label class="text-muted">Novo nome:</label>
+                        <input class="form-control form-control-sm" placeholder="Nome atual: {{profile.name}}" type="text" name="name" required="true"
+                            ng-model="editName">
+                        <br>
+                        <button class="btn btn-success btn-block" ng-disabled="editForm.$invalid" ng-click="editProfile(editName)"> Editar cargo </button>
+                    </form>
+                    <br>
+                    <a href="#!manage_profile"><button class="btn btn-primary btn-block"> Voltar </button></a>
+
+                    <!-- Mensagens de erro. -->
+                    <div id="alert-messages">
+                        <div class="alert alert-danger text-center" ng-show="editForm.name.$error.required && editForm.name.$dirty">
+                            Preencha o campo nome!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>

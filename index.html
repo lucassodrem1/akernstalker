@@ -1,0 +1,66 @@
+<html ng-app="projetoAker">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+    <script src="lib/angular.js"></script>
+    <script src="lib/angular-route.js"></script>
+    <script src="lib/jquery.js"></script>
+    <script src="lib/bootstrap.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/projetoAkerCtrl.js"></script>
+</head>
+
+<body ng-controller="indexCtrl" ng-view>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" ng-include="'view/navbar/index_navbar.html'"></nav>
+
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="offset-md-3 col-md-6 offset-md-3">
+                    <form name="registerForm" autocomplete="off">
+                        <h3 class="text-center text-muted"> Criar conta </h3>
+                        <label class="text-muted"> Nome: </label>
+                        <input type="text" name="username" class="form-control form-control-sm" ng-model="create.registerUsername" ng-required="true">
+                        <br>
+                        <label class="text-muted"> Senha: </label>
+                        <input type="password" name="password" class="form-control form-control-sm" ng-model="create.registerPassword" ng-required="true">
+                        <br>
+                        <label class="text-muted"> Repetir senha: </label>
+                        <input type="password" name="rePassword" class="form-control form-control-sm" ng-model="create.registerRePassword" ng-required="true">
+                        <br>
+                        <select class="form-control form-control-sm" ng-required="true" ng-model="create.registerProfile" ng-options="profile.id as profile.name for profile in profiles">
+                            <option value=""> Selecione um cargo. </option>
+                        </select>
+                        <br>
+                        <button class="btn btn-success btn-block" ng-disabled="(registerForm.$invalid) || (create.registerPassword != create.registerRePassword)"
+                            ng-click="createUser()">
+                            Criar conta
+                        </button>
+                    </form>
+
+                    <!-- Mensagens de erro. -->
+                    <div id="alert-messages">
+                        <div class="alert alert-danger text-center" ng-show="registerForm.username.$error.required && registerForm.username.$dirty">
+                            Preencha o campo nome!
+                        </div>
+                        <div class="alert alert-danger text-center" ng-show="registerForm.password.$error.required && registerForm.password.$dirty">
+                            Preencha o campo senha!
+                        </div>
+
+                        <div class="alert alert-danger text-center" ng-show="registerForm.rePassword.$error.required && registerForm.rePassword.$dirty">
+                            Preencha o campo repetir senha!
+                        </div>
+
+                        <div class="alert alert-danger text-center" ng-show="create.registerPassword != create.registerRePassword && registerForm.rePassword.$dirty">
+                            As senhas precisam ser iguais!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
