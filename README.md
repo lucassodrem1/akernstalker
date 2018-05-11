@@ -5,7 +5,9 @@ CRUD - AngularJS & PHP & MySQL.
 
 ## Installation
 
-Open in your web server the file "akernstalker/sql/connect.php" to install de database.
+1. Open the file **akernstalker/sql/connect.php**.
+1. Edit the `$host`, `$user` and `$pass` variables according to your phpMyAdmin settings.
+2. Open in your web server the same file to install the database.
 
 ### Possible Problems for PHP users who use versions older than 7.0
  
