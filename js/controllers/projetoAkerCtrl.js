@@ -3,11 +3,20 @@ angular.module("projetoAker").controller("indexCtrl", function ($scope, $http) {
     $scope.create = {};
     $scope.createUser = function () {
         $http.post("backend/user/create_user.php", $scope.create).then(function (response) {
-            document.getElementById("alert-messages").innerHTML = "";
-            var div = document.createElement("div");
-            div.className = "alert alert-success text-center";
-            div.innerHTML = "Conta criada com sucesso!";
-            document.getElementById("alert-messages").appendChild(div);
+            if (response.data == 1) {
+                document.getElementById("alert-messages").innerHTML = "";
+                var div = document.createElement("div");
+                div.className = "alert alert-danger text-center";
+                div.innerHTML = "Este nome já está cadastrado!";
+                document.getElementById("alert-messages").appendChild(div);
+            }
+            else {
+                document.getElementById("alert-messages").innerHTML = "";
+                var div = document.createElement("div");
+                div.className = "alert alert-success text-center";
+                div.innerHTML = "Conta criada com sucesso!";
+                document.getElementById("alert-messages").appendChild(div);
+            }
         });
         delete $scope.create;
         $scope.registerForm.$setPristine();

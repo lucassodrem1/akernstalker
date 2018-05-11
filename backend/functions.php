@@ -1,7 +1,7 @@
 <?php
 require_once '../../sql/connect.php';
 
-//Função para abreviar o metódo mysqli_query.
+//Função para abreviar o metódo $conn->query.
 function query($conn, $sql) 
 {
     if (($query = $conn->query($sql)) === false) {
@@ -9,3 +9,4 @@ function query($conn, $sql)
     }
     return $query;
 }
+

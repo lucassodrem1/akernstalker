@@ -3,23 +3,42 @@ class User
 {
     public function createUser($conn, $request) 
     {
-        $sql = "INSERT INTO `users` (`username`, `password`, `profile_id`) VALUES ('".$request->registerUsername."', '".$request->registerPassword."', '".$request->registerProfile."')";
-        query($conn, $sql);
+        //Verifica se esse nome já existe.
+        $error = 0;
+        $sql = "SELECT `username` FROM `users` WHERE `username`='".$request->registerUsername."'";
+        $query = query($conn, $sql);
+        if($query->num_rows == 0) {
+            //Criando usuário.
+            $sql = "INSERT INTO `users` (`username`, `password`, `profile_id`) VALUES ('".$request->registerUsername."', '".password_hash($request->registerPassword, PASSWORD_DEFAULT)."', '".$request->registerProfile."')";
+            query($conn, $sql);
+        } else {
+            $error = 1;
+        }
+
+        return $error;
     }
 
     public function userLogin($conn, $request)
     {
         $error = 0;
-
-        $sql = "SELECT `id`, `username`, `password` FROM `users` 
-                WHERE `username`='".$request->username."' AND `password`='".$request->password."'";
-        $query = query($conn, $sql);
         
-        if ($query->num_rows == 0) {
+        //Statement de login e senha.
+        $sql = "SELECT `id`, `username`, `password` FROM `users` 
+                WHERE `username`= ?";
+        if ($query = $conn->prepare($sql)) {
+            $query->bind_param('s', $request->username);
+            $query->execute();
+            $query = $query->get_result();
+        } else {
+            die($conn->error());
+        }
+        
+        $row = $query->fetch_assoc();
+
+        //Verificando se a senha está correta.
+        if(!(password_verify($request->password, $row['password']))) {
             $error = 1;
         } else {
-            //Pegando id do usuário.
-            $row = $query->fetch_assoc();
             //Atualizando último login do usuário.
             date_default_timezone_set('America/Sao_Paulo');
             $date = date('Y/m/d H:i:s', time());
@@ -81,7 +100,7 @@ class User
         }
 
         if (isset($request->newPass) && $request->newPass != '') {
-            $sql = "UPDATE `users` SET `password`='".$request->newPass."' WHERE `id`='".$request->id."'";
+            $sql = "UPDATE `users` SET `password`='".password_hash($request->newPass, PASSWORD_DEFAULT)."' WHERE `id`='".$request->id."'";
             query($conn, $sql);
         }
 

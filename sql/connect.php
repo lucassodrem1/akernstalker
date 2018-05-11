@@ -20,7 +20,7 @@ $conn->select_db($db);
 $sql = "CREATE TABLE IF NOT EXISTS `users` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`username` VARCHAR(12),
-	`password` VARCHAR(18),
+	`password` VARCHAR(120),
     `create_date` DATETIME NOT NULL DEFAULT NOW(),
 	`last_access` DATETIME NOT NULL DEFAULT NOW(),
 	`profile_id` INT NOT NULL,
