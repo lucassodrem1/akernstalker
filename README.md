@@ -7,7 +7,7 @@ CRUD - AngularJS & PHP & MySQL.
 
 Open in your web server the file "akernstalker/sql/connect.php" to install de database.
 
-### Possible Problems for php users who use versions older than 7.0
+### Possible Problems for PHP users who use versions older than 7.0
  
 If the program doesn't work correctly, the problem may be because of the following error:
 
