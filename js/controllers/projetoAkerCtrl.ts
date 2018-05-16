@@ -107,11 +107,19 @@ angular.module("projetoAker").controller("updateUserCtrl", ($scope, $http, $rout
 
         //Update user
         $http.put("backend/user/update_user.php", request).then(response => {
-            document.getElementById("alert-messages").innerHTML = "";
-            let div = document.createElement("div");
-            div.className = "alert alert-success text-center";
-            div.innerHTML = "Dados de usuário alterados com sucesso!";
-            document.getElementById("alert-messages").appendChild(div);
+            if (response.data == 1) {
+                document.getElementById("alert-messages").innerHTML = "";
+                let div = document.createElement("div");
+                div.className = "alert alert-danger text-center";
+                div.innerHTML = "Este usuário já existe!";
+                document.getElementById("alert-messages").appendChild(div);
+            } else {
+                document.getElementById("alert-messages").innerHTML = "";
+                let div = document.createElement("div");
+                div.className = "alert alert-success text-center";
+                div.innerHTML = "Dados de usuário alterados com sucesso!";
+                document.getElementById("alert-messages").appendChild(div);
+            }
         });
     };
 });

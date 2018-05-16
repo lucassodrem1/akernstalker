@@ -94,9 +94,18 @@ class User
     //Update user.
     public function updateUser($conn, $request)
     {
+        $error = 0;
+
         if (isset($request->newName) && $request->newName != '') {
-            $sql = "UPDATE `users` SET `username`='".$request->newName."' WHERE `id`='".$request->id."'";
-            query($conn, $sql);
+            //Verifica se já existe esse username.
+            $sql = "SELECT `username` FROM `users` WHERE `username`='".$request->newName."'";
+            $query = query($conn, $sql);
+            if ($query->num_rows != 0) {
+                $error = 1;
+            } else {
+                $sql = "UPDATE `users` SET `username`='".$request->newName."' WHERE `id`='".$request->id."'";
+                query($conn, $sql);
+            }
         }
 
         if (isset($request->newPass) && $request->newPass != '') {
@@ -108,6 +117,8 @@ class User
             $sql = "UPDATE `users` SET `profile_id`='".$request->newProfile."' WHERE `id`='".$request->id."'";
             query($conn, $sql);
         }
+
+        return $error;
     }
 
     //Delete user.
